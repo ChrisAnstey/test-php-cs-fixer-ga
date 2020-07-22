@@ -1,0 +1,21 @@
+name: Lint
+
+on: [pull_request]
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Lint on PR
+      uses: docker://paulobezerr/pronto
+      env:
+        PULL_REQUEST_ID: ${{ github.event.number }}
+        PRONTO_PHPCS_STANDARD: "PSR2"
+        PRONTO_GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: pronto run -f github_pr -c origin/master
