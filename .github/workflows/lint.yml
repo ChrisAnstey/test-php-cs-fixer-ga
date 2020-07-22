@@ -15,6 +15,6 @@ jobs:
       uses: docker://paulobezerr/pronto
       env:
         PULL_REQUEST_ID: ${{ github.event.number }}
-        PRONTO_PHPCS_STANDARD: "PSR12"
+        PRONTO_PHPCS_STANDARD: "PSR2"
       with:
         args: pronto run -f github_pr -c origin/master
